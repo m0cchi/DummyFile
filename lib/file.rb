@@ -122,7 +122,10 @@ class File
     self.open(path).each_line(block)
   end
 
-  def self.open(path)
-    self.new(path)
+  def self.open(path,&block)
+    f = self.new(path)
+    block.call f if block
+    f
   end
+
 end

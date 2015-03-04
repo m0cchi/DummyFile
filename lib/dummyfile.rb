@@ -14,8 +14,3 @@ module DummyFile
   end
 
 end
-DummyFile::require!
-
-fo = File.open('/Users/kazuto/temp/test.awk')
-fo << "sdss"
-puts fo.readlines

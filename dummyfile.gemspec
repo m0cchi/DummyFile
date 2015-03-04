@@ -5,13 +5,13 @@ require 'dummyfile/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "dummyfile"
-  spec.version       = Dummyfile::VERSION
+  spec.version       = DummyFile::VERSION
   spec.authors       = ["mocchi"]
   spec.email         = ["boom.boom.planet@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
-  spec.license       = "MIT"
+  spec.summary       = %q{File I/O Test}
+  spec.description   = %q{create Virtual File}
+  spec.homepage      = "https://github.com/mocchit/dummyfile"
+  spec.license       = "GPLv3"
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
