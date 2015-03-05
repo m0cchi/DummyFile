@@ -3,7 +3,7 @@ require 'stringio'
 class File
   @@vfile = {}
 
-  def initialize(path)
+  def initialize(path, mode = 'r')
     if @@vfile.include? path
       @io = @@vfile[path]
       @hash = @io.string.hash
@@ -15,6 +15,24 @@ class File
     @path = path
     @buf = []
     @old_hash = @hash - 1
+    @mode = parse_mode(mode)
+  end
+
+  def parse_mode(mode)
+    modes = []
+    if /^r/ === mode
+      modes << :r
+    elsif /^w/ === mode
+      modes << :w
+    elsif /^b/ === mode
+      modes << :b
+    elsif /^t/ === mode
+      modes << :t
+    else
+      modes << :r
+    end
+    modes + [:w,:r] if /\+/ == mode
+    modes.uniq
   end
 
   def <<(str)
