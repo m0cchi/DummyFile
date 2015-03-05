@@ -168,4 +168,8 @@ class File
     f
   end
 
+  def self.write(path,str)
+    self.open(path,'w').write(str)
+  end
+
 end
