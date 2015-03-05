@@ -1,8 +1,9 @@
 require 'stringio'
 
 class File
+  attr_reader :path
   @@vfile = {}
-
+  
   def initialize(path, mode = 'r',perm = 0666)
     if @@vfile.include? path
       @io = @@vfile[path]
