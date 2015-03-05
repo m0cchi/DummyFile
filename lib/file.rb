@@ -41,6 +41,10 @@ class File
     @mode.include?(mode) ? true : (raise IOError)
   end
 
+  def to_path
+    @path
+  end
+
   def <<(str)
     self.write(str)
   end
