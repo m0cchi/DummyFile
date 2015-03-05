@@ -36,6 +36,10 @@ class File
     modes.uniq
   end
   
+  def check_mode(mode)
+    @mode.include?(mode) ? true : (raise IOError)
+  end
+
   def <<(str)
     self.write(str)
   end
@@ -45,21 +49,21 @@ class File
   end
   
   def write(str)
-    c = @mode.include?(:w) ? @io.write(str) : 0
+    self.check_mode(:w)
+    c = @io.write(str)
     @hash = self.to_s.hash
-    unless str.length === c
-      raise IOError
-    end
     c
   end
   
   def each_line(rs = "",limit = 0)
+    self.check_mode(:r)
     @io.string.split("\n").each do |x|
       yield x
     end
   end
   
   def getc
+    self.check_mode(:r)
     unless @old_hash == @hash    
       @old_hash = @hash
       @buf = self.to_s.split('')
