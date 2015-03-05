@@ -45,6 +45,10 @@ class File
     @path
   end
 
+  def size
+    self.to_s.length
+  end
+
   def <<(str)
     self.write(str)
   end
