@@ -172,4 +172,8 @@ class File
     self.open(path,'w').write(str)
   end
 
+  def self.read(path)
+    self.open(path).readlines.join
+  end
+
 end
