@@ -1,18 +1,16 @@
 require 'stringio'
 
 class File
-  attr_reader :io
   @@vfile = {}
 
   def initialize(path)
     if @@vfile.include? path
-      vfile = @@vfile[path]
-      @io = vfile.io
+      @io = @@vfile[path]
       @hash = @io.string.hash
     else
       @io = StringIO.new ''
       @hash = ''.hash
-      @@vfile[path] = self
+      @@vfile[path] = @io
     end
     @path = path
     @buf = []
@@ -108,6 +106,7 @@ class File
   def clear
     @io.close
     @io = StringIO.new ''
+    @@vfile[path] = @io
     self
   end
 
