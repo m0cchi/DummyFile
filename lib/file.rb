@@ -155,6 +155,7 @@ class File
     @path = nil
     @io = @io.dup
     @io.close
+    @mode.clear
   end
 
   def self.foreach(path, rs = '',&block)
