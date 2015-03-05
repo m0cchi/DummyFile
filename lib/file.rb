@@ -31,30 +31,34 @@ class File
     else
       modes << :r
     end
-    modes + [:w,:r] if /\+/ == mode
+    modes += [:w,:r] if /\+/ === mode
+
     modes.uniq
   end
-
+  
   def <<(str)
     self.write(str)
   end
-
+  
   def to_s
     @io.string
   end
-
+  
   def write(str)
-    c = @io.write(str)
+    c = @mode.include?(:w) ? @io.write(str) : 0
     @hash = self.to_s.hash
+    unless str.length === c
+      raise IOError
+    end
     c
   end
-
+  
   def each_line(rs = "",limit = 0)
     @io.string.split("\n").each do |x|
       yield x
     end
   end
-
+  
   def getc
     unless @old_hash == @hash    
       @old_hash = @hash
@@ -62,7 +66,7 @@ class File
     end    
     @buf.shift
   end
-
+  
   def gets
     buf = ''
     ch = ''
