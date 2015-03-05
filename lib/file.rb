@@ -46,6 +46,9 @@ class File
   end
 
   def size
+    if @io.closed?
+      raise IOError
+    end
     self.to_s.length
   end
 
@@ -150,6 +153,8 @@ class File
     @hash = nil
     @old_hash = nil
     @path = nil
+    @io = @io.dup
+    @io.close
   end
 
   def self.foreach(path, rs = '',&block)
