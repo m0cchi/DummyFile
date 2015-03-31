@@ -176,4 +176,8 @@ class File
     self.open(path).readlines.join
   end
 
+  def self.exist?(path)
+    @@vfile.include? path
+  end
+
 end
